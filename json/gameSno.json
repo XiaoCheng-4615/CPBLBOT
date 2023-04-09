@@ -1,0 +1,119 @@
+[
+  {
+    "game": "01",
+    "viewership": 18395,
+    "team": "樂天桃猿 VS 中信兄弟",
+    "score": "4-1",
+    "Ballpark": "洲際棒球場",
+    "MVP": "廖健富",
+    "Game_time": "02小時59分"
+  },
+  {
+    "game": "02",
+    "viewership": 19523,
+    "team": "味全龍 VS 中信兄弟",
+    "score": "7-5",
+    "Ballpark": "洲際棒球場",
+    "MVP": "劉基鴻",
+    "Game_time": "03小時26分"
+  },
+  {
+    "game": "03",
+    "viewership": 11118,
+    "team": "富邦悍將 VS 樂天桃猿",
+    "score": "3-3",
+    "Ballpark": "樂天桃園棒球場",
+    "MVP": "黃子鵬",
+    "Game_time": "04小時33分"
+  },
+  {
+    "game": "04",
+    "viewership": 11118,
+    "team": "中信兄弟 VS 統一7-ELEVEn獅",
+    "score": "7-0",
+    "Ballpark": "台南棒球場",
+    "MVP": "象魔力S.M",
+    "Game_time": "03小時6分"
+  },
+  {
+    "game": "05",
+    "viewership": 8028,
+    "team": "味全龍 VS 富邦悍將",
+    "score": "2-3",
+    "Ballpark": "新莊棒球場",
+    "MVP": "高國輝",
+    "Game_time": "03小時24分"
+  },
+  {
+    "game": "06",
+    "viewership": 10550,
+    "team": "中信兄弟 VS 統一7-ELEVEn獅",
+    "score": "0-1",
+    "Ballpark": "澄清湖棒球場",
+    "MVP": "布雷克B.D",
+    "Game_time": "02小時49分"
+  },
+  {
+    "game": "07",
+    "viewership": 8030,
+    "team": "樂天桃猿 VS 富邦悍將",
+    "score": "10-7",
+    "Ballpark": "新莊棒球場",
+    "MVP": "林泓育",
+    "Game_time": "03小時53分"
+  },
+  {
+    "game": "08",
+    "viewership": 5724,
+    "team": "味全龍 VS 統一7-ELEVEn獅",
+    "score": "1-3",
+    "Ballpark": "澄清湖棒球場",
+    "MVP": "陳傑憲",
+    "Game_time": "03小時09分"
+  },
+  {
+    "game": "09",
+    "viewership": 5025,
+    "team": "樂天桃猿 VS 富邦悍將",
+    "score": "5-4",
+    "Ballpark": "新莊棒球場",
+    "MVP": "林泓育",
+    "Game_time": "03小時36分"
+  },
+  {
+    "game": "010",
+    "viewership": 9868,
+    "team": "中信兄弟 VS 味全龍",
+    "score": "4-6",
+    "Ballpark": "天母棒球場",
+    "MVP": "劉基鴻",
+    "Game_time": "03小時06分"
+  },
+  {
+    "game": "011",
+    "viewership": 4012,
+    "team": "樂天桃猿 VS 富邦悍將",
+    "score": "4-0",
+    "Ballpark": "新莊",
+    "MVP": "威達爾B.W",
+    "Game_time": "03小時21分"
+  },
+  {
+    "game": "012",
+    "viewership": 9889,
+    "team": "中信兄弟 VS 味全龍",
+    "score": "1-7",
+    "Ballpark": "天母棒球場",
+    "MVP": "鋼龍",
+    "Game_time": "02小時57分"
+  },
+  {
+    "game": "013",
+    "viewership": 4802,
+    "team": "樂天桃猿 VS 統一7-ELEVEn獅",
+    "score": "3-5",
+    "Ballpark": "台南棒球場",
+    "MVP": "林子豪",
+    "Game_time": "03小時55分"
+  }
+]
