@@ -115,5 +115,50 @@
     "Ballpark": "台南棒球場",
     "MVP": "林子豪",
     "Game_time": "03小時55分"
+  },
+  {
+    "game": "014",
+    "viewership": 7865,
+    "team": "中信兄弟 VS 味全龍",
+    "score": "5-4",
+    "Ballpark": "天母棒球場",
+    "MVP": "余謙",
+    "Game_time": "03小時38分"
+  },
+  {
+    "game": "015",
+    "viewership": 4017,
+    "team": "富邦悍將 VS 統一7-ELEVEn獅",
+    "score": "1-2",
+    "Ballpark": "台南棒球場",
+    "MVP": "胡金龍",
+    "Game_time": "02小時55分"
+  },
+  {
+    "game": "016",
+    "viewership": "null",
+    "team": "味全龍 VS 富邦悍將",
+    "score": "未開始",
+    "Ballpark": "新莊棒球場",
+    "MVP": "null",
+    "Game_time": "2023/04/11"
+  },
+  {
+    "game": "017",
+    "viewership": "null",
+    "team": "味全龍 VS 富邦悍將",
+    "score": "null",
+    "Ballpark": "新莊棒球場",
+    "MVP": "null",
+    "Game_time": "2023/04/12"
+  },
+  {
+    "game": "018",
+    "viewership": "null",
+    "team": "統一7-ELEVEn獅 VS 中信兄弟",
+    "score": "null",
+    "Ballpark": "洲際棒球場",
+    "MVP": "null",
+    "Game_time": "2023/04/12"
   }
 ]
