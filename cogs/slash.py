@@ -78,54 +78,27 @@ class Slash(Cog_Extension):
     @app_commands.command(name="todayschedule", description="中華職棒賽程")
     async def todayschedule(self, interaction: discord.Interaction):
         date = datetime.date.today().strftime("%Y%m%d")
-        tomorrow = (datetime.datetime.today() + datetime.timedelta(days=1)).strftime("%Y%m%d")
-        urls = {
-            "schedule": f'https://www.playsport.cc/livescore.php?aid=6&gamedate={date}&mode=1',
-            "schedule1": f'https://www.playsport.cc/livescore.php?aid=6&gamedate={tomorrow}&mode=1',
-            "record": "https://www.cpbl.com.tw/standings/season",
-            "CPBLTV" : "https://hamivideo.hinet.net/main/606.do"
-        }
-        async with aiohttp.ClientSession() as session:
-            schedule_response = await session.get(urls["schedule"])
-            schedule_content = await schedule_response.content.read()
-
-        soup = BeautifulSoup(schedule_content, 'html.parser')
+        url = f'https://www.playsport.cc/livescore.php?aid=6&gamedate=20230411&mode=1'
+        schedule_content = requests.get(url)
+        soup = BeautifulSoup(schedule_content.text, 'html.parser')
         team = soup.find_all('div', {'class': 'AllGamesList'}) 
         time = soup.find_all('td', {'class': 'team_cinter'})
-
-        embed = discord.Embed(title=f"中華職棒 {datetime.date.today().strftime('%Y%m%d')}", description="", color=0x00ff00)
         if len(team) == 0:
-            embed.add_field(name=f"今天{date}無賽事", value="", inline=False)
-
-            
-            async with aiohttp.ClientSession() as session:
-                schedule1_response = await session.get(urls["schedule1"])
-                schedule1_content = await schedule1_response.content.read()
-                
-            soup1 = BeautifulSoup(schedule1_content, 'html.parser')
-            team1 = soup1.find_all('div', {'class': 'AllGamesList'}) 
-            time1 = soup1.find_all('td', {'class': 'team_cinter'})
-            embed.add_field(name="明天賽事", value="", inline=False)
-            game_info1 = ""
-            for i in range(len(team1)):
-                g1 = team1[i].text.strip()
-                gtime1 = time1[i].text.strip()
-                game_info1 += f"{g1} - {gtime1}\n[文字轉播](https://www.cpbl.com.tw/box/live?kindCode=A&gameSno=120)\n"
-                
-            embed.add_field(name=f"明天比賽資訊(總共 {len(team1)} 賽事)\n", value=game_info1, inline=False)
+            # 如果當天沒有比賽
+            embed = discord.Embed(title=f"中華職棒 {date}", description="當天沒有比賽", color=0x00ff00)
         else:
-            game_info = ""
-            for i in range(len(team)):
-                g = team[i].text.strip()
-                gtime = time[i].text.strip()
-                game_info += f"{g} - {gtime}\n[文字轉播](https://www.cpbl.com.tw/box/live?kindCode=A&gameSno=120)\n"
-            embed.add_field(name=f"比賽資訊(總共 {len(team)} 賽事)\n", value=game_info, inline=False)
-
-        embed.add_field(name="各球隊戰績", value=f"[點我]({urls['record']})", inline=True)
-        embed.add_field(name="網路轉播", value=f"[CPBLTV]({urls['CPBLTV']})", inline=True)
-        embed.set_footer(text="資料來源：中華職棒官網", icon_url="")
+        # 如果有比賽
+            embed = discord.Embed(title=f"中華職棒 {date}", description="", color=0x00ff00)
+        for i, game in enumerate(team):
+            game_text = game.text.strip()
+            game_time = time[i*2].text.strip()  # 每個比賽對應的時間在time變數中出現兩次，所以需要選取對應的那一個
+            embed.add_field(name="對戰隊伍", value=f"{game_text}", inline=True)
+            embed.add_field(name="比賽時間", value=f"{game_time}", inline=True)
+            embed.add_field(name="網路轉播", value=f"[CPBLTV](https://hamivideo.hinet.net/hamivideo/main/606.do)", inline=True)
+        embed.set_footer(text="資料來源：中華職棒官網", icon_url="")    
 
         await interaction.response.send_message(embed=embed)
+
 
     @app_commands.command(name = "season", description = "中華職棒隊伍戰績")
     async def season(self, interaction: discord.Interaction):
