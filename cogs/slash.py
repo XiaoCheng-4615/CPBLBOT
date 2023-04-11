@@ -2,7 +2,6 @@ import discord
 import psutil
 import datetime
 import requests
-import aiohttp
 import json
 from prettytable import PrettyTable
 from bs4 import BeautifulSoup
