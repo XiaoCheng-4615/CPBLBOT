@@ -166,7 +166,7 @@ class Slash(Cog_Extension):
 
         await interaction.response.send_message(embed=embed)
     
-    @app_commands.command(name = "gamesno", description = "查詢場次資料 範例 /gamesno 012")
+    @app_commands.command(name = "gamesno", description = "查詢場次資料 範例 /gamesno 012 (不及時更新)")
     @app_commands.describe(game_id = "比賽代號 例:01、012")
     async def gamesno(self, interaction: discord.Interaction, game_id: str):
         try:
@@ -189,7 +189,7 @@ class Slash(Cog_Extension):
                 embed.add_field(name=f"比賽時間", value=f"{game_data['Game_time']}", inline=True)
                 await interaction.response.send_message(embed=embed)# 使用interaction.response.send_message()方法發送消息
             else:# 如果找不到遊戲資料，就發送一個錯誤消息
-                await interaction.response.send_message(f"找不到場地 ID 為 {game_id} 的觀眾人數")
+                await interaction.response.send_message(f"找不到場地 ID 為 {game_id} 的資料")
         except Exception as e: # 如果出現異常，就在控制台中顯示錯誤消息，並向用戶發送一個錯誤消息
             print(e)
             await interaction.response.send_message("出现异常，请稍后重试。")
@@ -198,10 +198,10 @@ class Slash(Cog_Extension):
     async def goal(self, interaction: discord.Interaction):
         # 回覆使用者的訊息
         embed = discord.Embed(title=f"更新的目標", description="", color=0x00ff00)
-        embed.add_field(name="1.", value="可在狀態中顯示今天有幾場比賽", inline=True)
-        embed.add_field(name="2.", value="能更方便的使用", inline=True)
-        embed.add_field(name="3.", value="能讓我的python能力更好，製造更好的系統", inline=True)
-        embed.add_field(name="4.", value="能讓機器人自動化查詢比賽資料", inline=True)
+        embed.add_field(name="1.方便性", value="可在狀態中顯示今天有幾場比賽", inline=False)
+        embed.add_field(name="2.個人能力", value="能讓我的python能力更好，製造更好的系統", inline=False)
+        embed.add_field(name="3.便利使用", value="能讓機器人自動化查詢比賽資料", inline=False)
+        embed.add_field(name="4.美觀性", value="能讓表達方式更簡潔", inline=False)
 
         await interaction.response.send_message(embed=embed)
  
