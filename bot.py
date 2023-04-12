@@ -2,6 +2,8 @@ import os
 import asyncio
 import discord
 import psutil
+import requests
+from bs4 import BeautifulSoup
 from discord.ext import commands
 
 intents = discord.Intents.all()

@@ -77,7 +77,7 @@ class Slash(Cog_Extension):
     @app_commands.command(name="todayschedule", description="中華職棒賽程")
     async def todayschedule(self, interaction: discord.Interaction):
         date = datetime.date.today().strftime("%Y%m%d")
-        url = f'https://www.playsport.cc/livescore.php?aid=6&gamedate=20230411&mode=1'
+        url = f'https://www.playsport.cc/livescore.php?aid=6&gamedate={date}&mode=1'
         schedule_content = requests.get(url)
         soup = BeautifulSoup(schedule_content.text, 'html.parser')
         team = soup.find_all('div', {'class': 'AllGamesList'}) 
@@ -90,7 +90,7 @@ class Slash(Cog_Extension):
             embed = discord.Embed(title=f"中華職棒 {date}", description="", color=0x00ff00)
         for i, game in enumerate(team):
             game_text = game.text.strip()
-            game_time = time[i*2].text.strip()  # 每個比賽對應的時間在time變數中出現兩次，所以需要選取對應的那一個
+            game_time = time[i].text.strip()  # 每個比賽對應的時間在time變數中出現兩次，所以需要選取對應的那一個
             embed.add_field(name="對戰隊伍", value=f"{game_text}", inline=True)
             embed.add_field(name="比賽時間", value=f"{game_time}", inline=True)
             embed.add_field(name="網路轉播", value=f"[CPBLTV](https://hamivideo.hinet.net/hamivideo/main/606.do)", inline=True)
@@ -194,7 +194,16 @@ class Slash(Cog_Extension):
             print(e)
             await interaction.response.send_message("出现异常，请稍后重试。")
 
+    @app_commands.command(name = "goal", description = "想要更新的目標")
+    async def goal(self, interaction: discord.Interaction):
+        # 回覆使用者的訊息
+        embed = discord.Embed(title=f"更新的目標", description="", color=0x00ff00)
+        embed.add_field(name="1.", value="可在狀態中顯示今天有幾場比賽", inline=True)
+        embed.add_field(name="2.", value="能更方便的使用", inline=True)
+        embed.add_field(name="3.", value="能讓我的python能力更好，製造更好的系統", inline=True)
+        embed.add_field(name="4.", value="能讓機器人自動化查詢比賽資料", inline=True)
 
+        await interaction.response.send_message(embed=embed)
  
 async def setup(bot):
     await bot.add_cog(Slash(bot))
