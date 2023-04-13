@@ -87,7 +87,7 @@ class Slash(Cog_Extension):
             embed = discord.Embed(title=f"中華職棒 {date}", description="當天沒有比賽", color=0x00ff00)
         else:
         # 如果有比賽
-            embed = discord.Embed(title=f"中華職棒 {date}", description="", color=0x00ff00)
+            embed = discord.Embed(title=f"中華職棒 {date}", description=f"今天有{len(team)}場賽事", color=0x00ff00)
         for i, game in enumerate(team):
             game_text = game.text.strip()
             game_time = time[i].text.strip()  # 每個比賽對應的時間在time變數中出現兩次，所以需要選取對應的那一個

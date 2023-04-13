@@ -1,8 +1,8 @@
 import os
 import asyncio
 import discord
-import psutil
 import requests
+import datetime
 from bs4 import BeautifulSoup
 from discord.ext import commands
 
@@ -23,12 +23,37 @@ async def on_ready():
     print(f"已載入 {len(slash_commands)} 個斜線指令")
 
 async def status_task():
+    # 缓存数据和缓存更新时间
+    cached_data = None
+    cache_expiration_time = None
+    
     while True:
-        use = psutil.cpu_percent()
-        ram = psutil.virtual_memory()
-        await bot.change_presence(activity=discord.Game(f'CPU使用量 ' + str(use) +  ' %'), status=discord.Status.online)
+        # 检查缓存是否过期
+        if not cache_expiration_time or datetime.datetime.now() >= cache_expiration_time:
+            # 过期或者没有缓存，进行API调用和HTTP请求，并更新缓存
+            date = datetime.date.today().strftime("%Y%m%d")
+            url = f'https://www.playsport.cc/livescore.php?aid=6&gamedate={date}&mode=1'
+            schedule_content = requests.get(url)
+            soup = BeautifulSoup(schedule_content.text, 'html.parser')
+            team = soup.find_all('div', {'class': 'AllGamesList'})
+            
+            # 更新缓存数据和缓存更新时间
+            cached_data = team
+            cache_expiration_time = datetime.datetime.now() + datetime.timedelta(minutes=5)
+        
+        # 根据缓存数据更新Discord状态
+        if len(cached_data) == 0:
+            await bot.change_presence(activity=discord.Game(f'今天沒有比賽'), status=discord.Status.online)
+        else:
+            await bot.change_presence(activity=discord.Game(f'今天有 {len(cached_data)} 場比賽'), status=discord.Status.online)
+        
+        # 更新日期和其他信息的Discord状态
+        date = datetime.date.today().strftime("%Y%m%d")
+        await bot.change_presence(activity=discord.Game(f'今天日期: {date}'), status=discord.Status.online)
         await asyncio.sleep(3) # 更改動態的秒數
-        await bot.change_presence(activity=discord.Game(f'RAM使用量：{ram.used / 1024 / 1024 / 1024:.2f} GB / {ram.total / 1024 / 1024 / 1024:.2f} GB\n'), status=discord.Status.online)
+        await bot.change_presence(activity=discord.Game(f'⚾中華職棒(非官方) | PHACS 製作'), status=discord.Status.online)
+        await asyncio.sleep(3) # 更改動態的秒數
+
 # 載入指令程式檔案
 @bot.command()
 async def load(ctx, extension):
