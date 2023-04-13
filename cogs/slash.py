@@ -150,18 +150,20 @@ class Slash(Cog_Extension):
         team_scores = soup.find_all('div', {'class': 'gamelist gamebox-notend gamebox-today'})
         embed = discord.Embed(title=f"{date} 即時比分", description="", color=0x00ff00)
 
-        if not team_scores:
-            embed.add_field(name=f"目前還沒開始比賽", value="", inline=True)
-            print("目前沒有比賽開始")
-        else:
-            for team_score in team_scores:
-                team_names = team_score.find_all('div', {'class': 'team_name'})
-                team_scores = team_score.find_all('div', {'class': 'team_score'})
-            for i in range(len(team_names)):
-                team_name = team_names[i].text.strip()
-                score = team_scores[i].text.strip()
-                embed.add_field(name=f"{team_name}", value=f"{score}", inline=True)
-                print(f"{team_name}: {score}")
+        embed.add_field(name="目前還在開發中", value=f"", inline=True)
+
+        # if not team_scores:
+        #     embed.add_field(name=f"目前還沒開始比賽", value="", inline=True)
+        #     print("目前沒有比賽開始")
+        # else:
+        #     for team_score in team_scores:
+        #         team_names = team_score.find_all('div', {'class': 'team_name'})
+        #         team_scores = team_score.find_all('div', {'class': 'team_score'})
+        #     for i in range(len(team_names)):
+        #         team_name = team_names[i].text.strip()
+        #         score = team_scores[i].text.strip()
+        #         embed.add_field(name=f"{team_name}", value=f"{score}", inline=True)
+        #         print(f"{team_name}: {score}")
 
 
         await interaction.response.send_message(embed=embed)
