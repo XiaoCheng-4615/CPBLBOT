@@ -94,7 +94,7 @@
     "viewership": 4012,
     "team": "樂天桃猿 VS 富邦悍將",
     "score": "4-0",
-    "Ballpark": "新莊",
+    "Ballpark": "新莊棒球場",
     "MVP": "威達爾B.W",
     "Game_time": "03小時21分"
   },
@@ -136,29 +136,119 @@
   },
   {
     "game": "016",
-    "viewership": "null",
+    "viewership": 2826,
     "team": "味全龍 VS 富邦悍將",
-    "score": "未開始",
+    "score": "1-9",
     "Ballpark": "新莊棒球場",
-    "MVP": "null",
-    "Game_time": "2023/04/11"
+    "MVP": "劉俊豪",
+    "Game_time": "03小時17分"
   },
   {
     "game": "017",
-    "viewership": "null",
+    "viewership": 2726,
     "team": "味全龍 VS 富邦悍將",
-    "score": "null",
+    "score": "5-6",
     "Ballpark": "新莊棒球場",
-    "MVP": "null",
-    "Game_time": "2023/04/12"
+    "MVP": "劉俊豪",
+    "Game_time": "03小時47分"
   },
   {
     "game": "018",
-    "viewership": "null",
+    "viewership": 3116,
     "team": "統一7-ELEVEn獅 VS 中信兄弟",
-    "score": "null",
+    "score": "0-1",
     "Ballpark": "洲際棒球場",
-    "MVP": "null",
-    "Game_time": "2023/04/12"
+    "MVP": "吳哲源",
+    "Game_time": "02小時27分"
+  },
+  {
+    "game": "019",
+    "viewership": 3234,
+    "team": "樂天桃猿 vs 富邦",
+    "score": "9-3",
+    "Ballpark": "新莊棒球場",
+    "MVP": "宋嘉翔",
+    "Game_time": "03小時34分"
+ },
+ {
+  "game": "020",
+  "viewership": 3028,
+  "team": "統一7-ELEVEn獅 VS 中信兄弟",
+  "score": "2-6",
+  "Ballpark": "洲際棒球場",
+  "MVP": "岳東華",
+  "Game_time": "03小時04分"
+  },
+  {
+  "game": "021",
+  "viewership": 7651,
+  "team": "樂天桃猿 vs 味全龍",
+  "score": "8-3",
+  "Ballpark": "樂天桃園棒球場",
+  "MVP": "劉基鴻",
+  "Game_time": "03小時40分"
+  },
+  {
+  "game": "022",
+  "viewership": 5519,
+  "team": "統一7-ELEVEn獅 VS 中信兄弟",
+  "score": "5-8",
+  "Ballpark": "洲際棒球場",
+  "MVP": "岳政華",
+  "Game_time": "03小時31分"
+  },
+  {
+  "game": "023",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "樂天桃園棒球場",
+  "MVP": "null",
+  "Game_time": "null"
+  },
+  {
+  "game": "024",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "新莊棒球場",
+  "MVP": "null",
+  "Game_time": "null"
+  },
+  {
+  "game": "025",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+  },
+  {
+  "game": "026",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+  },
+  {
+  "game": "027",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+  },
+  {
+  "game": "028",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
   }
 ]

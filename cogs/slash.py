@@ -182,7 +182,7 @@ class Slash(Cog_Extension):
 
             game_data = get_game_data(game_id) # 使用剛定義的函數來獲取特定遊戲的資料
             if game_data is not None:# 如果成功找到遊戲資料，就建立一個discord.Embed物件來顯示資訊
-                embed = discord.Embed(title=f"場次{game_id}", description=f"比賽地點: {game_data['Ballpark']}", color=0x00ff00)
+                embed = discord.Embed(title=f"場次{game_id} null = 未知/未更新", description=f"比賽地點: {game_data['Ballpark']}", color=0x00ff00)
                 embed.add_field(name=f"對戰隊伍", value=f"{game_data['team']}", inline=True)
                 embed.add_field(name=f"比分", value=f"{game_data['score']}", inline=True)
                 embed.add_field(name="", value="", inline=False)
