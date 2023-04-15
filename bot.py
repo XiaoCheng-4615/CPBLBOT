@@ -42,56 +42,38 @@ async def status_task():
             time = soup.find_all('td', {'class': 'team_cinter'})
             # 更新缓存数据和缓存更新时间
             cached_data = team
-            cache_expiration_time = now_taiwan + datetime.timedelta(minutes=30)
+            cache_expiration_time = now_taiwan + datetime.timedelta(minutes=10)
+            print('更新緩存')
         
         # 根据缓存数据更新Discord状态
         if len(cached_data) == 0:
-            await bot.change_presence(activity=discord.Game(f'今天沒有比賽'), status=discord.Status.online)
-            current_status = 0
-            status_nogame = [
+            game_status = [
                 {'type': 'Playing', 'name': f'今天日期: {date}'},
-                {'type': 'Listening', 'name': '今天沒有比賽'},
+            {'type': 'Listening', 'name': '今天沒有比賽'},
+            {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
+             ]
+        elif len(cached_data) > 1:
+            game_status = [
+                {'type': 'Playing', 'name': f'今天日期: {date}'},
+                {'type': 'Playing', 'name': f'今天有 {len(cached_data)} 場比賽'},
+                {'type': 'Playing', 'name': f'{cached_data[0].text.strip()}, {time[0].text.strip()}'},
+                {'type': 'Playing', 'name': f'{cached_data[1].text.strip()}, {time[1].text.strip()}'},
                 {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
             ]
-            while True:
-                nogame = discord.Game(name=status_nogame[current_status]['name'], type=status_nogame[current_status]['type'])
-                await bot.change_presence(activity=nogame)
-                current_status = (current_status + 1) % len(status_nogame)
-                await asyncio.sleep(10)  # 状态循环时间
         else:
-            if len(cached_data) > 1:
-                for i, game in enumerate(cached_data):
-                    game_text = game.text.strip()
-                    game_time = time[i].text.strip()  # 每個比賽對應的時間在time變數中出現兩次，所以需要選取對應的那一個
-                current_status = 0
-                status_game = [
-                    {'type': 'Playing', 'name': f'今天日期: {date}'},
-                    {'type': 'Playing', 'name': f'今天有 {len(cached_data)} 場比賽'},
-                    {'type': 'Playing', 'name': f'{cached_data[0].text.strip()}, {game_time}'},
-                    {'type': 'Playing', 'name': f'{cached_data[1].text.strip()}, {game_time}'},
-                    {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
-                ]
-                while True:
-                    game = discord.Game(name=status_game[current_status]['name'], type=status_game[current_status]['type'])
-                    await bot.change_presence(activity=game)
-                    current_status = (current_status + 1) % len(status_game)
-                    await asyncio.sleep(5)  # 状态循环时间
-            else:
-                for i, game in enumerate(cached_data):
-                    game_text = game.text.strip()
-                    game_time = time[i].text.strip()  # 每個比賽對應的時間在time變數中出現兩次，所以需要選取對應的那一個
-                current_status = 0
-                status_game1 = [
-                    {'type': 'Playing', 'name': f'今天日期: {date}'},
-                    {'type': 'Playing', 'name': f'今天有 {len(cached_data)} 場比賽'},
-                    {'type': 'Playing', 'name': f'{cached_data[0].text.strip()}, {game_time}'},
-                    {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
-                ]
-                while True:
-                    game1 = discord.Game(name=status_game1[current_status]['name'], type=status_game[current_status]['type'])
-                    await bot.change_presence(activity=game1)
-                    current_status = (current_status + 1) % len(status_game1)
-                    await asyncio.sleep(5)  # 状态循环时间
+            game_status = [
+                {'type': 'Playing', 'name': f'今天日期: {date}'},
+                {'type': 'Playing', 'name': f'今天有 {len(cached_data)} 場比賽'},
+                {'type': 'Playing', 'name': f'{cached_data[0].text.strip()}, {time[0].text.strip()}'},
+                {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
+            ]
+
+        current_status = 0
+        while True:
+            game = discord.Game(name=game_status[current_status]['name'], type=game_status[current_status]['type'])
+            await bot.change_presence(activity=game)
+            current_status = (current_status + 1) % len(game_status)
+            await asyncio.sleep(5)  # 状态循环时间
         
              
 
