@@ -27,10 +27,12 @@ async def status_task():
     # 缓存数据和缓存更新时间
     cached_data = None
     cache_expiration_time = None
+    now_utc = datetime.datetime.utcnow()
+    now_taiwan = now_utc + datetime.timedelta(hours=8)
     
     while True:
         # 检查缓存是否过期
-        if not cache_expiration_time or datetime.datetime.now() >= cache_expiration_time:
+        if not cache_expiration_time or now_taiwan >= cache_expiration_time:
             # 过期或者没有缓存，进行API调用和HTTP请求，并更新缓存
             date = datetime.date.today().strftime("%Y%m%d")
             url = f'https://www.playsport.cc/livescore.php?aid=6&gamedate={date}&mode=1'
@@ -40,7 +42,7 @@ async def status_task():
             time = soup.find_all('td', {'class': 'team_cinter'})
             # 更新缓存数据和缓存更新时间
             cached_data = team
-            cache_expiration_time = datetime.datetime.now() + datetime.timedelta(minutes=5)
+            cache_expiration_time = now_taiwan + datetime.timedelta(minutes=30)
         
         # 根据缓存数据更新Discord状态
         if len(cached_data) == 0:
@@ -90,6 +92,7 @@ async def status_task():
                     await bot.change_presence(activity=game1)
                     current_status = (current_status + 1) % len(status_game1)
                     await asyncio.sleep(5)  # 状态循环时间
+        
              
 
 # 載入指令程式檔案
