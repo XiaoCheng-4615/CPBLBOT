@@ -3,6 +3,8 @@ import asyncio
 import discord
 import requests
 import datetime
+import sched
+import time
 from bs4 import BeautifulSoup
 from discord.ext import commands
 
@@ -23,60 +25,66 @@ async def on_ready():
     print(f"已載入 {len(slash_commands)} 個斜線指令")
 
 
-async def status_task():
-    # 缓存数据和缓存更新时间
-    cached_data = None
-    cache_expiration_time = None
-    now_utc = datetime.datetime.utcnow()
-    now_taiwan = now_utc + datetime.timedelta(hours=8)
-    
+def status_task():
+    # 在這裡編寫您的代碼
+    now = datetime.datetime.now()
+    print(f"代碼已更新，更新時間：{now}")
+
     while True:
-        # 检查缓存是否过期
-        if not cache_expiration_time or now_taiwan >= cache_expiration_time:
-            # 过期或者没有缓存，进行API调用和HTTP请求，并更新缓存
+        # 計算明天的更新時間，並將其轉換為 Unix 時間戳
+        tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
+        update_time = time.mktime(tomorrow.timetuple())
+
+        # 創建 sched 調度器對象
+        s = sched.scheduler(time.time, time.sleep)
+
+        # 設置定時任務
+        s.enterabs(update_time, 1, status_task)
+
+        # 啟動 sched 調度器運行
+        s.run()
+
+        # 等待一段時間，以便避免 CPU 過度占用
+        time.sleep(60)
+
+async def status_task():
+    while True:
             date = datetime.date.today().strftime("%Y%m%d")
             url = f'https://www.playsport.cc/livescore.php?aid=6&gamedate={date}&mode=1'
             schedule_content = requests.get(url)
             soup = BeautifulSoup(schedule_content.text, 'html.parser')
             team = soup.find_all('div', {'class': 'AllGamesList'})
             time = soup.find_all('td', {'class': 'team_cinter'})
-            # 更新缓存数据和缓存更新时间
-            cached_data = team
-            cache_expiration_time = now_taiwan + datetime.timedelta(minutes=10)
-            print('更新緩存')
         
-        # 根据缓存数据更新Discord状态
-        if len(cached_data) == 0:
-            game_status = [
-                {'type': 'Playing', 'name': f'今天日期: {date}'},
-            {'type': 'Listening', 'name': '今天沒有比賽'},
-            {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
-             ]
-        elif len(cached_data) > 1:
-            game_status = [
-                {'type': 'Playing', 'name': f'今天日期: {date}'},
-                {'type': 'Playing', 'name': f'今天有 {len(cached_data)} 場比賽'},
-                {'type': 'Playing', 'name': f'{cached_data[0].text.strip()}, {time[0].text.strip()}'},
-                {'type': 'Playing', 'name': f'{cached_data[1].text.strip()}, {time[1].text.strip()}'},
+            # 根据缓存数据更新Discord状态
+            if len(team) == 0:
+                game_status = [
+                    {'type': 'Playing', 'name': f'今天日期: {date}'},
+                {'type': 'Listening', 'name': '今天沒有比賽'},
                 {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
-            ]
-        else:
-            game_status = [
-                {'type': 'Playing', 'name': f'今天日期: {date}'},
-                {'type': 'Playing', 'name': f'今天有 {len(cached_data)} 場比賽'},
-                {'type': 'Playing', 'name': f'{cached_data[0].text.strip()}, {time[0].text.strip()}'},
-                {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
-            ]
+                ]
+            elif len(team) > 1:
+                game_status = [
+                    {'type': 'Playing', 'name': f'今天日期: {date}'},
+                    {'type': 'Playing', 'name': f'今天有 {len(team)} 場比賽'},
+                    {'type': 'Playing', 'name': f'{team[0].text.strip()}, {time[0].text.strip()}'},
+                    {'type': 'Playing', 'name': f'{team[1].text.strip()}, {time[1].text.strip()}'},
+                    {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
+                ]
+            else:
+                game_status = [
+                    {'type': 'Playing', 'name': f'今天日期: {date}'},
+                    {'type': 'Playing', 'name': f'今天有 {len(team)} 場比賽'},
+                    {'type': 'Playing', 'name': f'{team[0].text.strip()}, {time[0].text.strip()}'},
+                    {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
+                ]
 
-        current_status = 0
-        while True:
-            game = discord.Game(name=game_status[current_status]['name'], type=game_status[current_status]['type'])
-            await bot.change_presence(activity=game)
-            current_status = (current_status + 1) % len(game_status)
-            await asyncio.sleep(5)  # 状态循环时间
-        
-             
-
+            current_status = 0
+            while True:
+                game = discord.Game(name=game_status[current_status]['name'], type=game_status[current_status]['type'])
+                await bot.change_presence(activity=game)
+                current_status = (current_status + 1) % len(game_status)
+                await asyncio.sleep(5)  # 状态循环时间
 # 載入指令程式檔案
 @bot.command()
 async def load(ctx, extension):

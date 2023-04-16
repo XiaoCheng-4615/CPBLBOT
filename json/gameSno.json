@@ -199,56 +199,74 @@
   },
   {
   "game": "023",
+  "viewership": 8562,
+  "team": "樂天桃猿 vs 味全龍",
+  "score": "4-5",
+  "Ballpark": "樂天桃園棒球場",
+  "MVP": "鋼龍",
+  "Game_time": "03小時30分"
+  },
+  {
+  "game": "024",
+  "viewership": 5282,
+  "team": "統一7-ELEVEn獅 VS 富邦悍將",
+  "score": "0-9",
+  "Ballpark": "新莊棒球場",
+  "MVP": "高國輝",
+  "Game_time": "03小時27分"
+  },
+  {
+  "game": "025",
   "viewership": "null",
-  "team": "null",
+  "team": "樂天桃猿 vs 味全龍",
   "score": "null",
   "Ballpark": "樂天桃園棒球場",
   "MVP": "null",
   "Game_time": "null"
   },
   {
-  "game": "024",
+  "game": "026",
   "viewership": "null",
-  "team": "null",
+  "team": "中信兄弟 VS 富邦悍將",
   "score": "null",
   "Ballpark": "新莊棒球場",
   "MVP": "null",
   "Game_time": "null"
   },
   {
-  "game": "025",
-  "viewership": "null",
-  "team": "null",
-  "score": "null",
-  "Ballpark": "null",
-  "MVP": "null",
-  "Game_time": "null"
-  },
-  {
-  "game": "026",
-  "viewership": "null",
-  "team": "null",
-  "score": "null",
-  "Ballpark": "null",
-  "MVP": "null",
-  "Game_time": "null"
-  },
-  {
   "game": "027",
   "viewership": "null",
-  "team": "null",
+  "team": "統一7-ELEVEn獅  VS 味全龍",
   "score": "null",
-  "Ballpark": "null",
+  "Ballpark": "天母棒球場",
   "MVP": "null",
   "Game_time": "null"
   },
   {
   "game": "028",
   "viewership": "null",
-  "team": "null",
+  "team": "樂天桃猿 VS 中信兄弟",
   "score": "null",
-  "Ballpark": "null",
+  "Ballpark": "洲際棒球場",
   "MVP": "null",
   "Game_time": "null"
+  },
+  {
+    "game": "029",
+    "viewership": "null",
+    "team": "富邦悍將 VS 味全龍",
+    "score": "null",
+    "Ballpark": "天母棒球場",
+    "MVP": "null",
+    "Game_time": "null"
+  },
+  {
+      "game": "030",
+      "viewership": "null",
+      "team": "樂天桃猿 VS 中信兄弟",
+      "score": "null",
+      "Ballpark": "洲際棒球場",
+      "MVP": "null",
+      "Game_time": "null"
   }
 ]

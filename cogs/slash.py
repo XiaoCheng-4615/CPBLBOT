@@ -10,6 +10,7 @@ from discord import app_commands
 from discord.app_commands import Choice
 from discord.ext import commands
 from core.classes import Cog_Extension
+from tabulate import tabulate
 
 
 
@@ -221,6 +222,32 @@ class Slash(Cog_Extension):
 
 
         await interaction.response.send_message(embed=embed)
- 
+
+
+    @app_commands.command(name = "stadium", description = "台灣所有球場")
+    async def stadium(self, interaction: discord.Interaction):
+        # 回覆使用者的訊息
+        url = 'https://dev.cpbl.com.tw/field'
+        stadium_content = requests.get(url)
+        soup = BeautifulSoup(stadium_content.text, 'html.parser')
+        stadiums = soup.find_all('div', {'class': 'item'})
+
+        # 將球場資訊整理成表格形式
+        table_header = ["地址", "球場名稱"]
+        table_data = []
+        for stadium in stadiums:
+            name = stadium.find("dt").get_text().strip()
+            address_list = stadium.find_all("dd")
+            address = " ".join([addr.get_text().strip() for addr in address_list])
+            table_data.append([name, address])
+
+        # 將表格資料加入嵌入式物件
+        embed = discord.Embed(title="台灣所有球場", description="以下是台灣各地的棒球場地列表", color=0x00ff00)
+        embed.add_field(name=" ", value="```" + tabulate(table_data, headers=table_header, tablefmt="simple") + "```", inline=False)
+
+
+
+
+        await interaction.response.send_message(embed=embed)
 async def setup(bot):
     await bot.add_cog(Slash(bot))
