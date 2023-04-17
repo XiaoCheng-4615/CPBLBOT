@@ -5,11 +5,15 @@ import requests
 import datetime
 import sched
 import time
+import subprocess
+import sys
+import traceback
 from bs4 import BeautifulSoup
 from discord.ext import commands
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix = "$", intents = intents)
+
 
 # 當機器人完成啟動時
 @bot.event
@@ -23,29 +27,6 @@ async def on_ready():
     # 印出登入身份以及載入的斜線指令數量
     print(f"目前登入身份 --> {bot.user}")
     print(f"已載入 {len(slash_commands)} 個斜線指令")
-
-
-def status_task():
-    # 在這裡編寫您的代碼
-    now = datetime.datetime.now()
-    print(f"代碼已更新，更新時間：{now}")
-
-    while True:
-        # 計算明天的更新時間，並將其轉換為 Unix 時間戳
-        tomorrow = datetime.datetime.now() + datetime.timedelta(days=1)
-        update_time = time.mktime(tomorrow.timetuple())
-
-        # 創建 sched 調度器對象
-        s = sched.scheduler(time.time, time.sleep)
-
-        # 設置定時任務
-        s.enterabs(update_time, 1, status_task)
-
-        # 啟動 sched 調度器運行
-        s.run()
-
-        # 等待一段時間，以便避免 CPU 過度占用
-        time.sleep(60)
 
 async def status_task():
     while True:
@@ -85,6 +66,8 @@ async def status_task():
                 await bot.change_presence(activity=game)
                 current_status = (current_status + 1) % len(game_status)
                 await asyncio.sleep(5)  # 状态循环时间
+
+
 # 載入指令程式檔案
 @bot.command()
 async def load(ctx, extension):
@@ -113,6 +96,35 @@ async def main():
     async with bot:
         await load_extensions()
         await bot.start("MTA5NDQwNjc0MzE5MjI1MjUwOA.G8d80j.nt8umCKrbi-wC0zcnT4P6BXL-ekysjYn83Hz10")
+def restart_bot():
+    try:
+        # 停止機器人
+        print('Stopping bot...')
+        subprocess.run(["taskkill", "/F", "/IM", "python.exe", "/T", "/FI", 'WINDOWTITLE eq python bot.py'])
+        # 啟動機器人
+        print('Starting bot...')
+        subprocess.Popen(["python", "bot.py"])
+    except:
+        # 如果發生錯誤，將錯誤信息輸出到控制台或日誌文件中
+        traceback.print_exc(file=sys.stdout)
+
+# 建立事件調度程序
+scheduler = sched.scheduler(time.time, time.sleep)
+
+# 計劃第一次執行
+today = time.localtime()
+runtime = time.mktime((today.tm_year, today.tm_mon, today.tm_mday, 0, 0, 0, 0, 0, -1))
+if time.time() > runtime:
+    runtime += 86400  # 如果當前時間已經過了今天的 00:00，則將重啟時間推到明天的 00:00
+    print('下次重啟時間')
+scheduler.enterabs(runtime, 1, restart_bot)
+
+# 計劃下一次執行
+scheduler.enter(86400, 1, restart_bot)
+
+# 啟動事件調度程序
+print('Start running scheduler...')
+scheduler.run()
 
 # 確定執行此py檔才會執行
 if __name__ == "__main__":
