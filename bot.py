@@ -6,8 +6,6 @@ import datetime
 import sched
 import time
 import subprocess
-import sys
-import traceback
 from bs4 import BeautifulSoup
 from discord.ext import commands
 
@@ -41,8 +39,8 @@ async def status_task():
             if len(team) == 0:
                 game_status = [
                     {'type': 'Playing', 'name': f'今天日期: {date}'},
-                {'type': 'Listening', 'name': '今天沒有比賽'},
-                {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
+                    {'type': 'Listening', 'name': '今天沒有比賽'},
+                    {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
                 ]
             elif len(team) > 1:
                 game_status = [
@@ -96,17 +94,16 @@ async def main():
     async with bot:
         await load_extensions()
         await bot.start("MTA5NDQwNjc0MzE5MjI1MjUwOA.G8d80j.nt8umCKrbi-wC0zcnT4P6BXL-ekysjYn83Hz10")
+
+# 確定執行此py檔才會執行
+if __name__ == "__main__":
+    asyncio.run(main())
+
 def restart_bot():
-    try:
-        # 停止機器人
-        print('Stopping bot...')
-        subprocess.run(["taskkill", "/F", "/IM", "python.exe", "/T", "/FI", 'WINDOWTITLE eq python bot.py'])
-        # 啟動機器人
-        print('Starting bot...')
-        subprocess.Popen(["python", "bot.py"])
-    except:
-        # 如果發生錯誤，將錯誤信息輸出到控制台或日誌文件中
-        traceback.print_exc(file=sys.stdout)
+    # 停止機器人
+    subprocess.run(["taskkill", "/F", "/IM", "python.exe", "/T", "/FI", 'WINDOWTITLE eq python bot.py'])
+    # 啟動機器人
+    subprocess.Popen(["python", "bot.py"])
 
 # 建立事件調度程序
 scheduler = sched.scheduler(time.time, time.sleep)
@@ -123,9 +120,4 @@ scheduler.enterabs(runtime, 1, restart_bot)
 scheduler.enter(86400, 1, restart_bot)
 
 # 啟動事件調度程序
-print('Start running scheduler...')
 scheduler.run()
-
-# 確定執行此py檔才會執行
-if __name__ == "__main__":
-    asyncio.run(main())
