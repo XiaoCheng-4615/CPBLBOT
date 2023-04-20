@@ -1,11 +1,9 @@
 import os
+import sys
 import asyncio
 import discord
 import requests
 import datetime
-import sched
-import time
-import subprocess
 from bs4 import BeautifulSoup
 from discord.ext import commands
 
@@ -84,6 +82,16 @@ async def reload(ctx, extension):
     await bot.reload_extension(f"cogs.{extension}")
     await ctx.send(f"ReLoaded {extension} done.")
 
+@bot.command()
+async def restart(ctx):
+    # 檢查是否是擁有者
+    if ctx.author.id == 726200365590118420:
+        await ctx.send('Bot 正在重新啟動...')
+        # 關閉當前進程
+        os.execl(sys.executable, sys.executable, *sys.argv)
+    else:
+        await ctx.send('你沒有權限重新啟動機器人。')
+    
 # 一開始bot開機需載入全部程式檔案
 async def load_extensions():
     for filename in os.listdir("./cogs"):
@@ -98,26 +106,3 @@ async def main():
 # 確定執行此py檔才會執行
 if __name__ == "__main__":
     asyncio.run(main())
-
-def restart_bot():
-    # 停止機器人
-    subprocess.run(["taskkill", "/F", "/IM", "python.exe", "/T", "/FI", 'WINDOWTITLE eq python bot.py'])
-    # 啟動機器人
-    subprocess.Popen(["python", "bot.py"])
-
-# 建立事件調度程序
-scheduler = sched.scheduler(time.time, time.sleep)
-
-# 計劃第一次執行
-today = time.localtime()
-runtime = time.mktime((today.tm_year, today.tm_mon, today.tm_mday, 0, 0, 0, 0, 0, -1))
-if time.time() > runtime:
-    runtime += 86400  # 如果當前時間已經過了今天的 00:00，則將重啟時間推到明天的 00:00
-    print('下次重啟時間')
-scheduler.enterabs(runtime, 1, restart_bot)
-
-# 計劃下一次執行
-scheduler.enter(86400, 1, restart_bot)
-
-# 啟動事件調度程序
-scheduler.run()
