@@ -3,6 +3,7 @@ import sys
 import asyncio
 import discord
 import requests
+import subprocess
 import datetime
 from bs4 import BeautifulSoup
 from discord.ext import commands
@@ -19,6 +20,7 @@ async def on_ready():
 
     # 創建 status_task
     bot.loop.create_task(status_task())
+    bot.loop.create_task(restart_task())
 
     # 印出登入身份以及載入的斜線指令數量
     print(f"目前登入身份 --> {bot.user}")
@@ -88,9 +90,22 @@ async def restart(ctx):
     if ctx.author.id == 726200365590118420:
         await ctx.send('Bot 正在重新啟動...')
         # 關閉當前進程
-        os.execl(sys.executable, sys.executable, *sys.argv)
+        # 啟動一個新的 Python 子進程
+        subprocess.Popen([sys.executable, "-c", "print('Bot 重啟完畢')"])
+        # 關閉當前進程
+        os._exit(0)
     else:
         await ctx.send('你沒有權限重新啟動機器人。')
+
+async def restart_task():
+    while True:
+        now = datetime.datetime.utcnow()
+        next_restart_time = datetime.datetime(now.year, now.month, now.day, hour=0, minute=0, second=0) + datetime.timedelta(days=1)
+        seconds_until_restart = (next_restart_time - now).total_seconds()
+        await asyncio.sleep(seconds_until_restart)
+        # 關閉當前進程，並在新的子進程中重啟
+        subprocess.Popen([sys.executable, "-c", "print('Bot 重啟完畢')"])
+        os._exit(0)
     
 # 一開始bot開機需載入全部程式檔案
 async def load_extensions():
