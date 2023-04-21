@@ -91,21 +91,30 @@ async def restart(ctx):
         await ctx.send('Bot 正在重新啟動...')
         # 關閉當前進程
         # 啟動一個新的 Python 子進程
-        subprocess.Popen([sys.executable, "-c", "print('Bot 重啟完畢')"])
-        # 關閉當前進程
-        os._exit(0)
+        os.execl(sys.executable, sys.executable, * sys.argv) # Nothing hapens
+
     else:
         await ctx.send('你沒有權限重新啟動機器人。')
 
 async def restart_task():
+    channel = bot.get_channel(1099117148330274927)
     while True:
-        now = datetime.datetime.utcnow()
+        now = datetime.datetime.now()
+        now_time = now.strftime('%Y-%m-%d %H:%M:%S')
         next_restart_time = datetime.datetime(now.year, now.month, now.day, hour=0, minute=0, second=0) + datetime.timedelta(days=1)
         seconds_until_restart = (next_restart_time - now).total_seconds()
+
+        next_restart_time_str = next_restart_time.strftime('%Y-%m-%d %H:%M:%S')
+        print(f"下次重啟時間 {next_restart_time_str} ({int(seconds_until_restart)} 現在距離下次時間的秒數).")
+
+        embed = discord.Embed(title=f"重啟通知", description=f"下次重啟時間 {next_restart_time_str} ({int(seconds_until_restart)} 現在距離下次時間的秒數).", color=0x00ff00)
+        embed.set_footer(text=f"現在時間 {now_time}", icon_url="")    
+        await channel.send(embed=embed)
+
         await asyncio.sleep(seconds_until_restart)
         # 關閉當前進程，並在新的子進程中重啟
-        subprocess.Popen([sys.executable, "-c", "print('Bot 重啟完畢')"])
-        os._exit(0)
+        os.execl(sys.executable, sys.executable, * sys.argv) # Nothing hapens
+
     
 # 一開始bot開機需載入全部程式檔案
 async def load_extensions():
