@@ -105,9 +105,9 @@ async def restart_task():
         seconds_until_restart = (next_restart_time - now).total_seconds()
 
         next_restart_time_str = next_restart_time.strftime('%Y-%m-%d %H:%M:%S')
-        print(f"下次重啟時間 {next_restart_time_str} ({int(seconds_until_restart)} 現在距離下次時間的秒數).")
+        print(f"下次重啟時間 {next_restart_time_str} ({int(seconds_until_restart / 60)} 現在距離下次時間的分鐘).")
 
-        embed = discord.Embed(title=f"重啟通知", description=f"下次重啟時間 {next_restart_time_str} ({int(seconds_until_restart)} 現在距離下次時間的秒數).", color=0x00ff00)
+        embed = discord.Embed(title=f"重啟通知", description=f"下次重啟時間 {next_restart_time_str} ({int(seconds_until_restart / 60)} 現在距離下次時間的分鐘).", color=0x00ff00)
         embed.set_footer(text=f"現在時間 {now_time}", icon_url="")    
         await channel.send(embed=embed)
 
