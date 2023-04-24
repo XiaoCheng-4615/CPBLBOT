@@ -3,7 +3,6 @@ import sys
 import asyncio
 import discord
 import requests
-import subprocess
 import datetime
 from bs4 import BeautifulSoup
 from discord.ext import commands
@@ -42,6 +41,7 @@ async def status_task():
                     {'type': 'Playing', 'name': f'今天日期: {date}'},
                     {'type': 'Listening', 'name': '今天沒有比賽'},
                     {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
+                    {'type': 'Listening', 'name': '每天00:00自動更新今日賽程'},
                 ]
             elif len(team) > 1:
                 game_status = [
@@ -50,6 +50,8 @@ async def status_task():
                     {'type': 'Playing', 'name': f'{team[0].text.strip()}, {time[0].text.strip()}'},
                     {'type': 'Playing', 'name': f'{team[1].text.strip()}, {time[1].text.strip()}'},
                     {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
+                    {'type': 'Listening', 'name': '每天00:00自動更新今日賽程'},
+
                 ]
             else:
                 game_status = [
@@ -57,6 +59,8 @@ async def status_task():
                     {'type': 'Playing', 'name': f'今天有 {len(team)} 場比賽'},
                     {'type': 'Playing', 'name': f'{team[0].text.strip()}, {time[0].text.strip()}'},
                     {'type': 'Listening', 'name': '⚾中華職棒(非官方) | PHACS 製作'},
+                    {'type': 'Listening', 'name': '每天00:00自動更新今日賽程'},
+
                 ]
 
             current_status = 0
