@@ -3,6 +3,8 @@
 import discord
 from discord.ext import commands
 from core.classes import Cog_Extension
+from discord import app_commands
+from discord.app_commands import Choice
 # Defines a custom Select containing colour options
 # that the user can choose. The callback function
 # of this class is called when the user changes their choice
@@ -56,15 +58,24 @@ class DropdownMenu(Cog_Extension):
         self.bot = bot
 
     @commands.command()
-    async def helpmenu(self, ctx):
-        """Sends a message with our dropdown containing colours"""
+    async def help(self, ctx):
+        """"""
 
         # Create the view containing our dropdown
         view = DropdownView()
 
         # Sending a message containing our view
-        embed = discord.Embed(title=f"CPBL中華職棒(非官方)", description="我是一個關於中華職棒(非官方)的機器人，我的目標是可以讓discord的人，直接查詢今天的賽事或者一些資訊", color=0x00ff00)
+        embed = discord.Embed(title=f"CPBL中華職棒(非官方)", description="我的目標是可以在discord，直接查詢今天的賽事或者一些資訊", color=0x00ff00)
         await ctx.send(embed=embed , view=view)
+
+    @app_commands.command(name = "help", description = "指令列表")
+    async def info(self, interaction: discord.Interaction):
+        view = DropdownView()
+        # 回覆使用者的訊息        
+        embed = discord.Embed(title=f"CPBL中華職棒(非官方)", description="我的目標是可以在discord，直接查詢今天的賽事或者一些資訊", color=0x00ff00)
+        # 发送嵌入式消息
+        
+        await interaction.response.send_message(embed=embed , view=view)
 
 
 async def setup(bot):
