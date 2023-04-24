@@ -51,7 +51,7 @@ class DropdownView(discord.ui.View):
         self.add_item(Dropdown())
 
 
-class DropdownMenud(Cog_Extension):
+class DropdownMenu(Cog_Extension):
     def __init__(self, bot):
         self.bot = bot
 
@@ -68,4 +68,4 @@ class DropdownMenud(Cog_Extension):
 
 
 async def setup(bot):
-    await bot.add_cog(DropdownMenud(bot))
+    await bot.add_cog(DropdownMenu(bot))
