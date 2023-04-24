@@ -208,20 +208,20 @@ class Slash(Cog_Extension):
 
         await interaction.response.send_message(embed=embed)
 
-    @app_commands.command(name = "helpmenu", description = "機器人所有指令")
-    async def helpmenu(self, interaction: discord.Interaction):
-        # 回覆使用者的訊息
-        embed = discord.Embed(title=f"指令表", description="", color=0x00ff00)
-        embed.add_field(name="/todayschedule ", value="今天的賽程(一軍)", inline=True)
-        embed.add_field(name="/mschedule", value="月份賽程表(一軍)", inline=True)
-        embed.add_field(name="/season ", value="各隊戰績表", inline=True)
-        embed.add_field(name="/gamesno", value="查詢場次資料(固定週五更新)", inline=False)
-        embed.add_field(name="/live", value="各隊轉播平台", inline=True)
-        embed.add_field(name="/websites ", value="各隊的官網", inline=True)
-        embed.add_field(name="/ls ", value="即時比分(開發中)", inline=True)
+    # @app_commands.command(name = "helpmenu", description = "機器人所有指令")
+    # async def helpmenu(self, interaction: discord.Interaction):
+    #     # 回覆使用者的訊息
+    #     embed = discord.Embed(title=f"指令表", description="", color=0x00ff00)
+    #     embed.add_field(name="/todayschedule ", value="今天的賽程(一軍)", inline=True)
+    #     embed.add_field(name="/mschedule", value="月份賽程表(一軍)", inline=True)
+    #     embed.add_field(name="/season ", value="各隊戰績表", inline=True)
+    #     embed.add_field(name="/gamesno", value="查詢場次資料(固定週五更新)", inline=False)
+    #     embed.add_field(name="/live", value="各隊轉播平台", inline=True)
+    #     embed.add_field(name="/websites ", value="各隊的官網", inline=True)
+    #     embed.add_field(name="/ls ", value="即時比分(開發中)", inline=True)
 
 
-        await interaction.response.send_message(embed=embed)
+    #     await interaction.response.send_message(embed=embed)
 
 
     @app_commands.command(name = "stadium", description = "台灣所有球場")
