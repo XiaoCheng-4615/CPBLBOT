@@ -17,9 +17,10 @@ class Dropdown(discord.ui.Select):
             discord.SelectOption(label='mschedule', description='月份賽程表(一軍)', emoji='📰'),
             discord.SelectOption(label='season', description='各隊戰績表', emoji='📚'),
             discord.SelectOption(label='gamesno', description='查詢場次資料(固定週五更新)', emoji='🔗'),
-            discord.SelectOption(label='live', description='各隊轉播平台', emoji='💬'),
+            discord.SelectOption(label='live', description='各隊轉播平台', emoji='🎥'),
             discord.SelectOption(label='websites', description='各隊的官網', emoji='🌐'),
             discord.SelectOption(label='ls', description='即時比分(開發中)', emoji='🎮'),
+            discord.SelectOption(label='stadium', description='全台棒球場', emoji='🏟'),
 
         ]
 
@@ -36,12 +37,11 @@ class Dropdown(discord.ui.Select):
         option = self.values[0]  # 取得使用者所選擇的選項
         option_obj = next((opt for opt in self.options if opt.label == option), None)  # 取得選項對應的 SelectOption 物件
         if option_obj is not None:
-            embed = discord.Embed(title=f"{option}", description=f"{option_obj.description}", color=0x00ff00)
-            embed.set_author(name="中華職棒(非官方)", url="https://www.cpbl.com.tw")
-            embed.set_image(url='https://www.cpbl.com.tw/theme/common/images/project/logo_new.png')
+            embed = discord.Embed(title=f"{option_obj.emoji} | {option} 指令", description=f"{option_obj.description}", color=0x00ff00)
+            embed.set_author(name="中華職棒(非官方)", icon_url= "https://www.cpbl.com.tw/theme/common/images/project/logo_new.png")
         else:
-            embed = discord.Embed(title=f"{option}", description=f"沒有詳細說明", color=0x00ff00)
-            embed.set_author(name="中華職棒(非官方)", url="https://www.cpbl.com.tw/theme/common/images/project/logo_new.png")
+            embed = discord.Embed(title=f"{option_obj.emoji} | {option} 指令", description=f"沒有詳細說明", color=0x00ff00)
+            embed.set_author(name="中華職棒(非官方)", icon_url= "https://www.cpbl.com.tw/theme/common/images/project/logo_new.png")
         await interaction.response.send_message(embed=embed)
 
 
