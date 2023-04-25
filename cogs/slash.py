@@ -170,7 +170,7 @@ class Slash(Cog_Extension):
         url = f"https://www.playsport.cc/livescore.php?aid=6&gamedate={date}&from=allianceMenu&ui=m2"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
-        team_scores = soup.find_all('div', {'class': 'gamelist gamebox-notend gamebox-today'})
+        team_scores = soup.find_all('div', {'class': 'gamelist__team'})
         embed = discord.Embed(title=f"{date} 即時比分", description="", color=0x00ff00)
 
         # embed.add_field(name="目前還在開發中", value=f"", inline=True)
@@ -187,6 +187,7 @@ class Slash(Cog_Extension):
                 score = team_scores[i].text.strip()
                 embed.add_field(name=f"{team_name}", value=f"{score}", inline=True)
                 print(f"{team_name}: {score}")
+        
 
 
         await interaction.response.send_message(embed=embed)
