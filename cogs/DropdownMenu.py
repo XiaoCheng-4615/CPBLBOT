@@ -13,13 +13,13 @@ class Dropdown(discord.ui.Select):
 
         # Set the options that will be presented inside the dropdown
         options = [
-            discord.SelectOption(label='todayschedule', description='今天的賽程(一軍)', emoji='🟥'),
-            discord.SelectOption(label='mschedule', description='月份賽程表(一軍)', emoji='🟩'),
-            discord.SelectOption(label='season', description='各隊戰績表', emoji='🟦'),
-            discord.SelectOption(label='gamesno', description='查詢場次資料(固定週五更新)', emoji='🟦'),
-            discord.SelectOption(label='live', description='各隊轉播平台', emoji='🟦'),
-            discord.SelectOption(label='websites', description='各隊的官網', emoji='🟦'),
-            discord.SelectOption(label='ls', description='即時比分(開發中)', emoji='🟦'),
+            discord.SelectOption(label='todayschedule', description='今天的賽程(一軍)', emoji='📰'),
+            discord.SelectOption(label='mschedule', description='月份賽程表(一軍)', emoji='📰'),
+            discord.SelectOption(label='season', description='各隊戰績表', emoji='📚'),
+            discord.SelectOption(label='gamesno', description='查詢場次資料(固定週五更新)', emoji='🔗'),
+            discord.SelectOption(label='live', description='各隊轉播平台', emoji='💬'),
+            discord.SelectOption(label='websites', description='各隊的官網', emoji='🌐'),
+            discord.SelectOption(label='ls', description='即時比分(開發中)', emoji='🎮'),
 
         ]
 

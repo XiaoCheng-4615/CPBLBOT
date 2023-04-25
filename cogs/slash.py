@@ -58,14 +58,36 @@ class Slash(Cog_Extension):
         ]
     )
     async def mschedule(self, interaction: discord.Interaction, m: str):
-    # 獲取使用指令的使用者名稱
-    # 使用者選擇的選項資料，可以使用name或value取值
-        if m in self.cache:
-            image = self.cache[m]
-        else:   
-            with open(f"image/{m}.png", "rb") as f:
-                image = discord.File(f, f"{m}.png")
-        await interaction.response.send_message(f"一軍{m}月份賽程表", file=image)
+        try:
+            if m in self.cache:
+                image = self.cache[m]
+            else:
+                with open(f"image/{m}.png", "rb") as f:
+                    image = discord.File(f, f"{m}.png")
+
+            if m == "2023_04":
+                embed = discord.Embed(title=f"一軍{m}月份賽程表", description=f"以下是{m}補賽的日期", color=0x00ff00)
+                embed.add_field(name="日期", value="2023/04/24", inline=True)
+                embed.add_field(name="場次", value="G29", inline=True)
+                embed.add_field(name="比賽", value="富邦悍將 VS 味全龍", inline=True)
+                embed.add_field(name="原定日期", value="2023/04/19", inline=True)
+                embed.add_field(name="時間", value="16:35", inline=True)
+                embed.add_field(name="地點", value="天母棒球場", inline=True)
+                embed.add_field(name="\u200b", value="\u200b", inline=False)
+                embed.add_field(name="日期", value="2023/05/15", inline=True)
+                embed.add_field(name="場次", value="G30", inline=True)
+                embed.add_field(name="比賽", value="樂天桃猿 VS 中信兄弟", inline=True)
+                embed.add_field(name="原定日期", value="2023/04/19", inline=True)
+                embed.add_field(name="時間", value="16:35", inline=True)
+                embed.add_field(name="地點", value="洲際棒球場", inline=True)
+                embed.set_image(url=f"attachment://{m}.png")
+            else:
+                embed = discord.Embed(title=f"一軍{m}月份賽程表", description="", color=0x00ff00)
+                embed.set_image(url=f"attachment://{m}.png")
+            await interaction.response.send_message(embed=embed, file=image)
+        except Exception as e:
+            await interaction.response.send_message(f"發生錯誤：{str(e)}")
+
 
 
     @app_commands.command(name = "live", description = "中華職棒轉播平台")
@@ -151,20 +173,20 @@ class Slash(Cog_Extension):
         team_scores = soup.find_all('div', {'class': 'gamelist gamebox-notend gamebox-today'})
         embed = discord.Embed(title=f"{date} 即時比分", description="", color=0x00ff00)
 
-        embed.add_field(name="目前還在開發中", value=f"", inline=True)
+        # embed.add_field(name="目前還在開發中", value=f"", inline=True)
 
-        # if not team_scores:
-        #     embed.add_field(name=f"目前還沒開始比賽", value="", inline=True)
-        #     print("目前沒有比賽開始")
-        # else:
-        #     for team_score in team_scores:
-        #         team_names = team_score.find_all('div', {'class': 'team_name'})
-        #         team_scores = team_score.find_all('div', {'class': 'team_score'})
-        #     for i in range(len(team_names)):
-        #         team_name = team_names[i].text.strip()
-        #         score = team_scores[i].text.strip()
-        #         embed.add_field(name=f"{team_name}", value=f"{score}", inline=True)
-        #         print(f"{team_name}: {score}")
+        if not team_scores:
+            embed.add_field(name=f"目前還沒開始比賽", value="", inline=True)
+            print("目前沒有比賽開始")
+        else:
+            for team_score in team_scores:
+                team_names = team_score.find_all('div', {'class': 'team_name'})
+                team_scores = team_score.find_all('div', {'class': 'team_score'})
+            for i in range(len(team_names)):
+                team_name = team_names[i].text.strip()
+                score = team_scores[i].text.strip()
+                embed.add_field(name=f"{team_name}", value=f"{score}", inline=True)
+                print(f"{team_name}: {score}")
 
 
         await interaction.response.send_message(embed=embed)

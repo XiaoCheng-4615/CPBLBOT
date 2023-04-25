@@ -103,6 +103,7 @@ async def restart(ctx):
 
 async def restart_task():
     channel = bot.get_channel(1099117148330274927)
+    owner = bot.get_user(726200365590118420)
     while True:
         now = datetime.datetime.now()
         now_time = now.strftime('%Y-%m-%d %H:%M:%S')
@@ -110,10 +111,11 @@ async def restart_task():
         seconds_until_restart = (next_restart_time - now).total_seconds()
 
         next_restart_time_str = next_restart_time.strftime('%Y-%m-%d %H:%M:%S')
-        print(f"下次重啟時間 {next_restart_time_str} ({int(seconds_until_restart / 60)} 現在距離下次時間的分鐘).")
+        print(f"下次重啟時間 {next_restart_time_str} (剩下 {int(seconds_until_restart / 60)} 分鐘重啟).")
 
-        embed = discord.Embed(title=f"重啟通知", description=f"下次重啟時間 {next_restart_time_str} ({int(seconds_until_restart / 60)} 現在距離下次時間的分鐘).", color=0x00ff00)
-        embed.set_footer(text=f"現在時間 {now_time}", icon_url="")    
+        embed = discord.Embed(title=f"重啟通知", description=f"下次重啟時間 {next_restart_time_str} (剩下 {int(seconds_until_restart / 60)} 分鐘重啟)", color=0x00ff00)
+        embed.set_footer(text=f"現在時間 {now_time}", icon_url="")   
+        await owner.send(embed=embed) 
         await channel.send(embed=embed)
 
         await asyncio.sleep(seconds_until_restart)

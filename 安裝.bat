@@ -5,3 +5,5 @@ pip install datetime
 pip install requests
 pip install bs4
 pip install prettytable
+pip install os
+pip install sys
