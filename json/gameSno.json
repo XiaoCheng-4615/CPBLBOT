@@ -217,48 +217,48 @@
   },
   {
   "game": "025",
-  "viewership": "null",
+  "viewership": 7742,
   "team": "樂天桃猿 vs 味全龍",
-  "score": "null",
+  "score": "0-4",
   "Ballpark": "樂天桃園棒球場",
-  "MVP": "null",
-  "Game_time": "null"
+  "MVP": "林智勝",
+  "Game_time": "3小時16分"
   },
   {
   "game": "026",
-  "viewership": "null",
+  "viewership": 9028,
   "team": "中信兄弟 VS 富邦悍將",
-  "score": "null",
+  "score": "2-9",
   "Ballpark": "新莊棒球場",
-  "MVP": "null",
-  "Game_time": "null"
+  "MVP": "范國宸",
+  "Game_time": "2小時53分"
   },
   {
   "game": "027",
-  "viewership": "null",
+  "viewership": 3868,
   "team": "統一7-ELEVEn獅  VS 味全龍",
-  "score": "null",
+  "score": "10-3",
   "Ballpark": "天母棒球場",
-  "MVP": "null",
-  "Game_time": "null"
+  "MVP": "蘇智傑",
+  "Game_time": "3小時33分"
   },
   {
   "game": "028",
-  "viewership": "null",
+  "viewership": 3149,
   "team": "樂天桃猿 VS 中信兄弟",
-  "score": "null",
+  "score": "9-2",
   "Ballpark": "洲際棒球場",
-  "MVP": "null",
-  "Game_time": "null"
+  "MVP": "陳克羿",
+  "Game_time": "3小時4分"
   },
   {
     "game": "029",
-    "viewership": "null",
+    "viewership": 2736,
     "team": "富邦悍將 VS 味全龍",
-    "score": "null",
+    "score": "4-7",
     "Ballpark": "天母棒球場",
-    "MVP": "null",
-    "Game_time": "null"
+    "MVP": "曹祐齊",
+    "Game_time": "4小時5分"
   },
   {
       "game": "030",
@@ -267,6 +267,240 @@
       "score": "null",
       "Ballpark": "洲際棒球場",
       "MVP": "null",
-      "Game_time": "null"
-  }
+      "Game_time": "2023/05/15"
+  },
+  {
+    "game": "031",
+    "viewership": 2736,
+    "team": "富邦悍將 VS 味全龍",
+    "score": "3-2",
+    "Ballpark": "天母棒球場",
+    "MVP": "辛元旭",
+    "Game_time": "3小時38分"
+ },
+ {
+  "game": "032",
+  "viewership": 2335,
+  "team": "統一7-ELEVEn獅 VS 中信兄弟",
+  "score": "4-2",
+  "Ballpark": "洲際棒球場",
+  "MVP": "陳傑憲",
+  "Game_time": "4小時18分"
+},
+{
+  "game": "033",
+  "viewership": 3968,
+  "team": "富邦悍將 VS 味全龍",
+  "score": "2-3",
+  "Ballpark": "天母棒球場",
+  "MVP": "李凱威",
+  "Game_time": "3小時38分"
+},
+{
+  "game": "034",
+  "viewership": 4013,
+  "team": "樂天桃猿 VS 統一7-ELEVEn獅",
+  "score": "2-22",
+  "Ballpark": "台南棒球場",
+  "MVP": "布雷克B.D",
+  "Game_time": "3小時32分"
+},
+{
+  "game": "035",
+  "viewership": 10828,
+  "team": "富邦悍將 VS 中信兄弟",
+  "score": "3-3",
+  "Ballpark": "洲際棒球場",
+  "MVP": "陳冠勳",
+  "Game_time": "4小時35分"
+},
+{
+  "game": "036",
+  "viewership": 5151,
+  "team": "樂天桃猿 VS 統一7-ELEVEn獅",
+  "score": "7-10",
+  "Ballpark": "台南棒球場",
+  "MVP": "胡金龍",
+  "Game_time": "3小時26分"
+},
+{
+  "game": "037",
+  "viewership": 7921,
+  "team": "味全龍 VS 中信兄弟",
+  "score": "7-2",
+  "Ballpark": "洲際棒球場",
+  "MVP": "布里悍J.B",
+  "Game_time": "3小時0分"
+},
+{
+  "game": "038",
+  "viewership": 4588,
+  "team": "樂天桃猿 VS 統一7-ELEVEn獅",
+  "score": "7-4",
+  "Ballpark": "台南棒球場",
+  "MVP": "黃子鵬",
+  "Game_time": "3小時31分"
+},
+{
+  "game": "039",
+  "viewership": 3365,
+  "team": "統一7-ELEVEn獅  VS 味全龍",
+  "score": "7-3",
+  "Ballpark": "斗六棒球場",
+  "MVP": "羅昂L.O",
+  "Game_time": "3小時24分"
+},
+{
+  "game": "040",
+  "viewership": 3534,
+  "team": "富邦悍將 VS 樂天桃猿",
+  "score": "1-3",
+  "Ballpark": "樂天桃園棒球場",
+  "MVP": "陳克羿",
+  "Game_time": "3小時10分"
+},
+{
+  "game": "041",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "042",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+},
+{
+  "game": "null",
+  "viewership": "null",
+  "team": "null",
+  "score": "null",
+  "Ballpark": "null",
+  "MVP": "null",
+  "Game_time": "null"
+}
 ]
