@@ -171,7 +171,7 @@ class Slash(Cog_Extension):
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
         team_scores = soup.find_all('div', {'class': 'gamelist__team'})
-        embed = discord.Embed(title=f"{date} 即時比分", description="", color=0x00ff00)
+        embed = discord.Embed(title=f"{date} 即時比分", description=f"比分可能會更新的比較慢請", color=0x00ff00)
 
         # embed.add_field(name="目前還在開發中", value=f"", inline=True)
 
@@ -182,11 +182,17 @@ class Slash(Cog_Extension):
             for team_score in team_scores:
                 team_names = team_score.find_all('div', {'class': 'team_name'})
                 team_scores = team_score.find_all('div', {'class': 'team_score'})
-            for i in range(len(team_names)):
-                team_name = team_names[i].text.strip()
-                score = team_scores[i].text.strip()
-                embed.add_field(name=f"{team_name}", value=f"{score}", inline=True)
-                print(f"{team_name}: {score}")
+                
+                for i in range(len(team_names)):
+                    teamname = team_names[i].get_text().strip()
+                    teamscore = team_scores[i].get_text().strip()
+                    embed.add_field(name=f"{teamname}", value=f"{teamscore} \u200b", inline=False)
+                    print(f"{teamname}: {teamscore}")
+            # for i in range(len(team_names)):
+            #     team_name = team_names[i].text.strip()
+            #     score = team_scores[i].text.strip()
+            #     embed.add_field(name=f"{team_name}", value=f"{score}", inline=True)
+            #     print(f"{team_name}: {score}")
         
 
 
