@@ -167,7 +167,7 @@ class Slash(Cog_Extension):
     async def ls(self, interaction: discord.Interaction):
         # 回覆使用者的訊息
         date = datetime.date.today().strftime("%Y%m%d")
-        url = f"https://www.playsport.cc/livescore.php?aid=6&gamedate=20230418&mode=1&ui=m2"
+        url = f"https://www.playsport.cc/livescore.php?aid=6&gamedate={date}&mode=1&ui=m2"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
         team_scores = soup.find_all('div', {'class': 'gamelist__team'})
@@ -184,22 +184,26 @@ class Slash(Cog_Extension):
             embed = discord.Embed(title=f"{date}", description=f"今天沒有比賽", color=0x00ff00)
             print("今天沒有比賽")
         else:
-            embed = discord.Embed(title=f"{date} 即時比分", description=f"比分可能會更新的比較慢請", color=0x00ff00)
+            embed = discord.Embed(title=f"{date} 即時比分", description=f"比分可能會更新的比較慢請見諒", color=0x00ff00)
             for team_score in team_scores:
                 team_names = team_score.find_all('div', {'class': 'team_name'})
                 team_scores = team_score.find_all('div', {'class': 'team_score'})
-                if not team_names:
-                    embed.add_field(name="", value=f"目前還沒開始比賽", inline=True)
-                    print("目前沒有比賽開始")
-                else:
-                    for i in range(len(team_names)):
-                        teamname = team_names[i].get_text().strip()
-                        # teamname = teamname[:6]
-                        teamscore = team_scores[i].get_text().strip()
-                        embed.add_field(name=f"{teamname}", value=f"{teamscore}", inline=False)
-                        print(f"{teamname}: {teamscore}")
-            embed.add_field(name="---", value="\u200b", inline=False) # 加入 Markdown 語法來製造分隔線
-            
+                for i in range(0, len(team_names), 2):
+                    teamname1 = team_names[i].get_text().strip()[:2]
+                    teamscore1 = team_scores[i].get_text().strip()
+                    if i + 1 < len(team_names):
+                        teamname2 = team_names[i+1].get_text().strip()[:2]
+                        teamscore2 = team_scores[i+1].get_text().strip()
+                        embed.add_field(name=f"{teamname1}VS{teamname2}", value=f"```{teamscore1}  -  {teamscore2}```", inline=True)
+                    else:
+                        embed.add_field(name=f"{teamname1}", value=f"{teamscore1}", inline=True)
+            embed.add_field(name="\u200b", value="\u200b", inline=False) # 加入空白字符來製造分隔線
+            for i, game in enumerate(team):
+                game_text = game.text.strip()
+                game_time = time[i].text.strip()  # 每個比賽對應的時間在time變數中出現兩次，所以需要選取對應的那一個
+                embed.add_field(name="對戰隊伍", value=f"{game_text}", inline=True)
+                embed.add_field(name="比賽時間", value=f"{game_time}", inline=True)
+                embed.add_field(name="網路轉播", value=f"[CPBLTV](https://hamivideo.hinet.net/hamivideo/main/606.do)", inline=True)
             
             # for i in range(len(team_names)):
             #     team_name = team_names[i].text.strip()
