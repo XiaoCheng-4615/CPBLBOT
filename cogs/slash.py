@@ -167,27 +167,40 @@ class Slash(Cog_Extension):
     async def ls(self, interaction: discord.Interaction):
         # 回覆使用者的訊息
         date = datetime.date.today().strftime("%Y%m%d")
-        url = f"https://www.playsport.cc/livescore.php?aid=6&gamedate={date}&from=allianceMenu&ui=m2"
+        url = f"https://www.playsport.cc/livescore.php?aid=6&gamedate=20230418&mode=1&ui=m2"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
         team_scores = soup.find_all('div', {'class': 'gamelist__team'})
-        embed = discord.Embed(title=f"{date} 即時比分", description=f"比分可能會更新的比較慢請", color=0x00ff00)
+        todayurl = f'https://www.playsport.cc/livescore.php?aid=6&gamedate={date}&mode=1'
+        today_content = requests.get(todayurl)
+        today_soup = BeautifulSoup(today_content.text, 'html.parser')
+        team = today_soup.find_all('div', {'class': 'AllGamesList'}) 
+        time = today_soup.find_all('td', {'class': 'team_cinter'})
+
 
         # embed.add_field(name="目前還在開發中", value=f"", inline=True)
 
         if not team_scores:
-            embed.add_field(name=f"目前還沒開始比賽", value="", inline=True)
-            print("目前沒有比賽開始")
+            embed = discord.Embed(title=f"{date}", description=f"今天沒有比賽", color=0x00ff00)
+            print("今天沒有比賽")
         else:
+            embed = discord.Embed(title=f"{date} 即時比分", description=f"比分可能會更新的比較慢請", color=0x00ff00)
             for team_score in team_scores:
                 team_names = team_score.find_all('div', {'class': 'team_name'})
                 team_scores = team_score.find_all('div', {'class': 'team_score'})
-                
-                for i in range(len(team_names)):
-                    teamname = team_names[i].get_text().strip()
-                    teamscore = team_scores[i].get_text().strip()
-                    embed.add_field(name=f"{teamname}", value=f"{teamscore} \u200b", inline=False)
-                    print(f"{teamname}: {teamscore}")
+                if not team_names:
+                    embed.add_field(name="", value=f"目前還沒開始比賽", inline=True)
+                    print("目前沒有比賽開始")
+                else:
+                    for i in range(len(team_names)):
+                        teamname = team_names[i].get_text().strip()
+                        # teamname = teamname[:6]
+                        teamscore = team_scores[i].get_text().strip()
+                        embed.add_field(name=f"{teamname}", value=f"{teamscore}", inline=False)
+                        print(f"{teamname}: {teamscore}")
+            embed.add_field(name="---", value="\u200b", inline=False) # 加入 Markdown 語法來製造分隔線
+            
+            
             # for i in range(len(team_names)):
             #     team_name = team_names[i].text.strip()
             #     score = team_scores[i].text.strip()
@@ -236,6 +249,7 @@ class Slash(Cog_Extension):
         embed.add_field(name="4.美觀性", value="能讓表達方式更簡潔", inline=False)
 
         await interaction.response.send_message(embed=embed)
+    
 
     # @app_commands.command(name = "helpmenu", description = "機器人所有指令")
     # async def helpmenu(self, interaction: discord.Interaction):
