@@ -103,7 +103,28 @@ async def restart(ctx):
 
 async def restart_task():
     channel = bot.get_channel(1099117148330274927)
+    todayschedulechannel = bot.get_channel(1102579942232961044)
     owner = bot.get_user(726200365590118420)
+    date = datetime.date.today().strftime("%Y%m%d")
+    url = f'https://www.playsport.cc/livescore.php?aid=6&gamedate={date}&mode=1'
+    schedule_content = requests.get(url)
+    soup = BeautifulSoup(schedule_content.text, 'html.parser')
+    team = soup.find_all('div', {'class': 'AllGamesList'}) 
+    time = soup.find_all('td', {'class': 'team_cinter'})
+    if len(team) == 0:
+            # 如果當天沒有比賽
+        embed = discord.Embed(title=f"中華職棒 {date}", description="當天沒有比賽", color=0x00ff00)
+    else:
+        # 如果有比賽
+            embed = discord.Embed(title=f"中華職棒 {date}", description=f"今天有{len(team)}場賽事", color=0x00ff00)
+    for i, game in enumerate(team):
+            game_text = game.text.strip()
+            game_time = time[i].text.strip()  # 每個比賽對應的時間在time變數中出現兩次，所以需要選取對應的那一個
+            embed.add_field(name="對戰隊伍", value=f"{game_text}", inline=True)
+            embed.add_field(name="比賽時間", value=f"{game_time}", inline=True)
+            embed.add_field(name="網路轉播", value=f"[CPBLTV](https://hamivideo.hinet.net/hamivideo/main/606.do)", inline=True)
+    embed.set_footer(text="資料來源：中華職棒官網", icon_url="")  
+    await todayschedulechannel.send(embed=embed)
     while True:
         now = datetime.datetime.now()
         now_time = now.strftime('%Y-%m-%d %H:%M:%S')
