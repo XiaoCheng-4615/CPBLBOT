@@ -102,7 +102,6 @@ async def restart(ctx):
         await ctx.send('你沒有權限重新啟動機器人。')
 
 async def restart_task():
-    channel = bot.get_channel(1099117148330274927)
     todayschedulechannel = bot.get_channel(1102579942232961044)
     owner = bot.get_user(726200365590118420)
     date = datetime.date.today().strftime("%Y%m%d")
@@ -137,7 +136,6 @@ async def restart_task():
         embed = discord.Embed(title=f"重啟通知", description=f"下次重啟時間 {next_restart_time_str} (剩下 {int(seconds_until_restart / 60)} 分鐘重啟)", color=0x00ff00)
         embed.set_footer(text=f"現在時間 {now_time}", icon_url="")   
         await owner.send(embed=embed) 
-        await channel.send(embed=embed)
 
         await asyncio.sleep(seconds_until_restart)
         # 關閉當前進程，並在新的子進程中重啟
