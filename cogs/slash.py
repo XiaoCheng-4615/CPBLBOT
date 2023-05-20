@@ -81,6 +81,15 @@ class Slash(Cog_Extension):
                 embed.add_field(name="時間", value="16:35", inline=True)
                 embed.add_field(name="地點", value="洲際棒球場", inline=True)
                 embed.set_image(url=f"attachment://{m}.png")
+            elif m == "2023_05":
+                embed = discord.Embed(title=f"一軍{m}月份賽程表", description=f"以下是{m}補賽的日期", color=0x00ff00)
+                embed.add_field(name="日期", value="2023/07/02", inline=True)
+                embed.add_field(name="場次", value="G62", inline=True)
+                embed.add_field(name="比賽", value="統一獅 VS 樂天桃園", inline=True)
+                embed.add_field(name="原定日期", value="2023/05/07", inline=True)
+                embed.add_field(name="時間", value="17:05", inline=True)
+                embed.add_field(name="地點", value="天母棒球場", inline=True)
+                embed.set_image(url=f"attachment://{m}.png")
             else:
                 embed = discord.Embed(title=f"一軍{m}月份賽程表", description="", color=0x00ff00)
                 embed.set_image(url=f"attachment://{m}.png")
