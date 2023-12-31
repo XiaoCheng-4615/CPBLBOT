@@ -1,4 +1,4 @@
-# CPBLBOT
+# CPBLBOT 本專案於2023/04/25 永不再更新
 
 非CPBL官方 
 PHACS 官方製作
