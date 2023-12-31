@@ -151,7 +151,7 @@ async def load_extensions():
 async def main():
     async with bot:
         await load_extensions()
-        await bot.start("MTA5NDQwNjc0MzE5MjI1MjUwOA.G8d80j.nt8umCKrbi-wC0zcnT4P6BXL-ekysjYn83Hz10")
+        await bot.start("TOKEN")
 
 # 確定執行此py檔才會執行
 if __name__ == "__main__":
